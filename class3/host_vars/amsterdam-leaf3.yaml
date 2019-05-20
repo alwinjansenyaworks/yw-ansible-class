@@ -1,0 +1,4 @@
+intf_uplink_to_amsterdam_spine1_intf: GigabitEthernet0/0
+intf_uplink_to_amsterdam_spine1_ip: 172.20.30.9
+intf_uplink_to_amsterdam_spine1_subnet: 255.255.255.254
+intf_uplink_to_amsterdam_spine1_ip_cidr: 172.20.30.9/31
