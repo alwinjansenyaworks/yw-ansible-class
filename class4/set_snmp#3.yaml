@@ -1,0 +1,10 @@
+---
+- name: Set snmp
+  hosts: [amsterdam]
+  tasks:
+    - name: configure snmp
+      ios_config:
+        lines:
+          - 'snmp-server community {{snmp_commmunity}} RW'
+          - 'snmp-server host {{snmp_host_ip}} {{snmp_commmunity}}'
+          - 'snmp-server trap-source {{snmp_source_intf}}'

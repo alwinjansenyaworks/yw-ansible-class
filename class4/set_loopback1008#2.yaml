@@ -1,0 +1,10 @@
+---
+- name: Set Loopback1008
+  hosts: amsterdam-spine1
+  tasks:
+    - name: configure loopback1008 IP address
+      ios_config:
+        lines:
+          - description Loopback interface for Student 08
+          - 'ip address {{intf_loopback1008_ip}} {{intf_loopback1008_subnet}}'
+        parents: interface loopback1008         

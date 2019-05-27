@@ -1,0 +1,5 @@
+snmp-server community student8 RW
+snmp-server trap-source Loopback0
+{% for snmp_host in snmp_host_ips %}
+snmp-server host {{ snmp_host }} student8
+{% endfor %}}

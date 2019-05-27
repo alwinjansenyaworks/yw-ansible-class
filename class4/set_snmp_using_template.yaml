@@ -1,0 +1,7 @@
+---
+- name: Set snmp using template
+  hosts: amsterdam-leaf3
+  tasks:
+    - name: Add snmp config
+      ios_config:
+        lines: "{{ lookup('template', './templates/cisco_ios_snmp.j2') }}"

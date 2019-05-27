@@ -1,0 +1,7 @@
+---
+- name: Set baseline after interfaces using template
+  hosts: amsterdam-leaf3
+  tasks:
+    - name: Add baseline after template config
+      ios_config:
+        lines: "{{ lookup('template', './templates/cisco_ios_after_interfaces.j2') }}"

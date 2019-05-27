@@ -1,0 +1,10 @@
+---
+- name: Set snmp
+  hosts: amsterdam-leaf3
+  tasks:
+    - name: configure snmp
+      ios_config:
+        lines:
+          - snmp-server community student8 RW
+          - snmp-server host 192.168.99.8 student8
+          - snmp-server trap-source loopback 0
