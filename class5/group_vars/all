@@ -1,0 +1,8 @@
+snmp_commmunity: student8
+snmp_host_ip: 192.168.99.8 
+snmp_source_intf: Loopback0
+snmp_host_ips: 
+  - 192.168.99.1
+  - 172.16.80.254
+  - 145.47.18.5 
+ansible_python_interpreter: " /usr/bin/env python"

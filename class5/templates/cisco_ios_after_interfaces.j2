@@ -1,0 +1,27 @@
+!
+ip default-gateway 172.16.80.1
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 30 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ exec-timeout 30 0
+ transport input telnet ssh
+!
+no scheduler allocate
+!
+end

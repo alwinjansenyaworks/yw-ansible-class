@@ -1,0 +1,9 @@
+---
+- name: Test NAPALM module
+  hosts: amsterdam-leaf3
+  gather_facts: no
+  tasks:
+    - name: NAPALM Facts
+      napalm_get_facts:
+        provider: "{{ provider_napalm }}"
+        filter: "facts,interfaces,config"

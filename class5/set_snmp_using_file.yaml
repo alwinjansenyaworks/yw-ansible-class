@@ -1,0 +1,7 @@
+---
+- name: Set snmp
+  hosts: amsterdam-leaf3
+  tasks:
+    - name: Add snmp config
+      ios_config:
+        lines: "{{ lookup('file', './files/snmp_config.txt') }}"

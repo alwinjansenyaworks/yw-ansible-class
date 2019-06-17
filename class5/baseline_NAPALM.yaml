@@ -1,0 +1,41 @@
+---
+- name: Deploy baseline config with NAPALM
+  hosts: [amsterdam]
+  gather_facts: False
+  vars:
+    configs_DIR: './CFGS'
+    napalm_commit_changes: False
+  tasks:
+    # Create config folder
+    - name: Check if config folder exist
+      local_action: file path={{ configs_DIR }}/{{ inventory_hostname }} state=directory
+      run_once: no
+      check_mode: no
+      changed_when: no
+    #Generate config baseline before interfaces
+    - name: BASELINE - Generate config BEFORE interface config
+      template: src='cisco_ios_before_interfaces.j2' dest={{configs_DIR}}/{{ inventory_hostname }}/{{ inventory_hostname }}_config_before_interfaces.conf
+      delegate_to: localhost
+    #Push or diff baseline to device
+    - name: BASELINE - Deploy config (or diff only) BEFORE interfaces
+      napalm_install_config:
+        provider: '{{ provider_napalm }}'
+        config_file: '{{configs_DIR}}/{{ inventory_hostname }}/{{ inventory_hostname }}_config_before_interfaces.conf'
+        commit_changes: False
+        replace_config: False
+        diff_file: '{{configs_DIR}}/{{ inventory_hostname }}/{{inventory_hostname }}_config_before_interfaces.diff'
+      #Generate / config interfaces << NOT PART OF THIS CLASS5 EXERCISE
+      #Generate config baseline after interfaces
+    - name: BASELINE - Generate config AFTER interface config
+      template: src='cisco_ios_after_interfaces.j2' dest={{configs_DIR}}/{{ inventory_hostname }}/{{ inventory_hostname }}_config_after_interfaces.conf
+      delegate_to: localhost
+    #Push or diff baseline to device
+    - name: BASELINE - Deploy config (or diff only) AFTER interfaces
+      napalm_install_config:
+        provider: '{{ provider_napalm }}'
+        config_file: '{{configs_DIR}}/{{ inventory_hostname }}/{{ inventory_hostname }}_config_after_interfaces.conf' 
+        commit_changes: False
+        replace_config: False
+        diff_file: '{{configs_DIR}}/{{ inventory_hostname }}/{{ inventory_hostname }}_config_after_interfaces.diff'
+
+

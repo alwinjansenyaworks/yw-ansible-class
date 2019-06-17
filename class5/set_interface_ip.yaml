@@ -1,0 +1,13 @@
+---
+- name: Set IP address on interface
+  hosts: amsterdam-leaf3
+  tasks:
+    - name: Set interface config - net_l3_interface
+      net_l3_interface:
+        name: '{{ intf_uplink_to_amsterdam_spine1_intf }}'
+        ipv4: '{{ intf_uplink_to_amsterdam_spine1_ip_cidr }}' 
+    - name: Enable interface
+      net_interface:
+        name: '{{ intf_uplink_to_amsterdam_spine1_intf }}'
+        enabled: True    
+  
