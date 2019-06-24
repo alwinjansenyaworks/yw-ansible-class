@@ -1,0 +1,22 @@
+transceiver qsfp default-mode 4x10G
+!
+hostname {{ inventory_hostname }} 
+!
+spanning-tree mode mstp 
+!
+no aaa root
+!
+!
+!
+interface {{ loopback_interface }}
+ip address {{ loopback_ip }} 
+!
+!
+interface {{ oob_interface }}
+ip address {{ oob_ip }} 
+no lldp receive
+no lldp transmit
+!
+ip routing
+!
+end

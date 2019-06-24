@@ -1,0 +1,11 @@
+---
+
+### Baseline config
+
+loopback_interface: 'Loopback0' 
+loopback_ip: 10.199.1.{{ site_id }}3/32 
+oob_interface: GigabitEthernet0/1 
+oob_ip: 172.16.80.{{ site_id }}3/24 
+def_gateway: 172.16.80.1
+
+### END Baseline config 

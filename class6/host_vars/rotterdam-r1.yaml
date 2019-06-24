@@ -1,0 +1,5 @@
+loopback_interface: 'Loopback0' 
+loopback_ip: '10.199.1.{{ site_id }}1/32' 
+oob_interface: GigabitEthernet0/3 
+oob_ip: '172.16.80.{{ site_id }}1/24'
+def_gateway: 172.16.80.1

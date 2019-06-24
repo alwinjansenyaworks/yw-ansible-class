@@ -1,0 +1,38 @@
+### Rotterdam devices
+[rotterdam-edge-routers]
+rotterdam-r1	ansible_host=172.16.80.81
+
+[rotterdam-spines]
+rotterdam-spine1	ansible_host=172.16.80.82
+
+
+[rotterdam-leafs]
+rotterdam-leaf1		ansible_host=172.16.80.83
+rotterdam-leaf2		ansible_host=172.16.80.84
+
+[rotterdam:children]
+rotterdam-edge-routers
+rotterdam-spines
+rotterdam-leafs
+
+### END Rotterdam devices
+
+### Vendor specific
+[cisco_ios:children]
+rotterdam-edge-routers
+rotterdam-spines
+
+[arista_eos:children]
+rotterdam-leafs
+
+### End vendor specific
+
+
+### Device specific
+[routers]
+rotterdam-r1
+
+[switches:children]
+rotterdam-spines
+rotterdam-leafs
+### End device specific

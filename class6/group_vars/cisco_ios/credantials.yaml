@@ -1,0 +1,7 @@
+ansible_become: yes
+ansible_become_method: enable
+ansible_user: student8
+ansible_password: bqCapgA58HI2S1Ixf3qK
+ansible_become_pass: bqCapgA58HI2S1Ixf3qK
+ansible_connection: network_cli
+ansible_network_os: 'ios'

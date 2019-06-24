@@ -1,0 +1,9 @@
+provider_napalm:
+  hostname: "{{ ansible_host }}"
+  username: "{{ ansible_user }}"
+  password: "{{ ansible_password }}"
+  dev_os: "eos"
+  optional_args: {}
+
+template_id: 'arista_eos'
+

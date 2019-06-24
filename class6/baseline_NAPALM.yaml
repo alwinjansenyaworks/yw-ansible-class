@@ -1,0 +1,28 @@
+---
+- name: Deploy baseline config with NAPALM
+  hosts: [rotterdam]
+  gather_facts: False
+  vars:
+    configs_DIR: './CFGS'
+    napalm_commit_changes: False
+  tasks:
+    # Create config folder
+    - name: Check if config folder exist
+      local_action: file path={{ configs_DIR }}/{{ inventory_hostname }} state=directory
+      run_once: no
+      check_mode: no
+      changed_when: no
+    #Generate config baseline 
+    - name: BASELINE - Generate config   
+      template: src='templates/{{ template_id }}.j2' dest={{configs_DIR}}/{{ inventory_hostname }}/{{ inventory_hostname }}_base_config_.conf
+      delegate_to: localhost
+    #Push or diff baseline to device
+    - name: BASELINE - Deploy config (or diff only) BEFORE interfaces
+      napalm_install_config:
+        provider: '{{ provider_napalm }}'
+        config_file: '{{configs_DIR}}/{{ inventory_hostname }}/{{ inventory_hostname }}_base_config.conf'
+        commit_changes: '{{ napalm_commit_changes }}'
+        replace_config: False
+        diff_file: '{{configs_DIR}}/{{ inventory_hostname }}/{{inventory_hostname }}_base_config.diff'
+      #Generate / config interfaces << NOT PART OF THIS CLASS5 EXERCISE
+      #Generate config baseline after interfaces
